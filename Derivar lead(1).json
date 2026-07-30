@@ -1,0 +1,399 @@
+{
+  "name": "Derivar lead",
+  "nodes": [
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1a7Nua-ggkxCmN1WiVjruY9NJX3eJFNU_osrmA3v8XQ4",
+          "mode": "list",
+          "cachedResultName": "Leads- clase 4",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1a7Nua-ggkxCmN1WiVjruY9NJX3eJFNU_osrmA3v8XQ4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Hoja 1",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1a7Nua-ggkxCmN1WiVjruY9NJX3eJFNU_osrmA3v8XQ4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "empresa ": "={{ $('Start').item.json.empresa }}",
+            "email": "={{ $('Start').item.json.email }}",
+            "nombre": "={{ $('Start').item.json.nombre }}",
+            "resumen": "={{ $('Start').item.json.resumen }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "empresa ",
+              "displayName": "empresa ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nombre",
+              "displayName": "nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "resumen",
+              "displayName": "resumen",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        544,
+        -96
+      ],
+      "id": "be353022-908f-47dc-a1ca-e7cb2937b8c6",
+      "name": "Append row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "e1HYeXPyZ5snrGxn",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "empresa",
+              "type": "any"
+            },
+            {
+              "name": "email",
+              "type": "any"
+            },
+            {
+              "name": "nombre",
+              "type": "any"
+            },
+            {
+              "name": "resumen",
+              "type": "any"
+            },
+            {
+              "name": "confidence",
+              "type": "any"
+            },
+            {
+              "name": "mensaje",
+              "type": "any"
+            },
+            {
+              "name": "intent",
+              "type": "any"
+            }
+          ]
+        }
+      },
+      "id": "f22201ff-1474-4f70-a221-e6080996d8f4",
+      "typeVersion": 1.1,
+      "name": "Start",
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "position": [
+        -32,
+        96
+      ]
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1a7Nua-ggkxCmN1WiVjruY9NJX3eJFNU_osrmA3v8XQ4",
+          "mode": "list",
+          "cachedResultName": "Leads- clase 4",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1a7Nua-ggkxCmN1WiVjruY9NJX3eJFNU_osrmA3v8XQ4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Revision manual",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1a7Nua-ggkxCmN1WiVjruY9NJX3eJFNU_osrmA3v8XQ4/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "email",
+              "lookupValue": "={{ $json.email }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        144,
+        96
+      ],
+      "id": "99932c96-9a9b-451d-828a-44677841092b",
+      "name": "Buscar escalado en base",
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "e1HYeXPyZ5snrGxn",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "6835705e-7e3c-464c-ae4e-1f5dfbc1fa29",
+              "leftValue": "={{ $json.row_number }}",
+              "rightValue": "",
+              "operator": {
+                "type": "number",
+                "operation": "empty",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        336,
+        96
+      ],
+      "id": "ae7f817c-f76c-45bb-ba0e-36b0bb46c74b",
+      "name": "escalado existe?"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1a7Nua-ggkxCmN1WiVjruY9NJX3eJFNU_osrmA3v8XQ4",
+          "mode": "list",
+          "cachedResultName": "Leads- clase 4",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1a7Nua-ggkxCmN1WiVjruY9NJX3eJFNU_osrmA3v8XQ4/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Revision manual",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1a7Nua-ggkxCmN1WiVjruY9NJX3eJFNU_osrmA3v8XQ4/edit#gid=0"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "empresa ": "={{ $('Start').item.json.empresa }}",
+            "email": "={{ $('Start').item.json.email }}",
+            "nombre": "={{ $('Start').item.json.nombre }}",
+            "resumen": "={{ $('Start').item.json.resumen }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "empresa ",
+              "displayName": "empresa ",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "email",
+              "displayName": "email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "nombre",
+              "displayName": "nombre",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "resumen",
+              "displayName": "resumen",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        528,
+        240
+      ],
+      "id": "30a92d27-01a9-4728-8315-69eb379926c2",
+      "name": "Append or update row in sheet",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "e1HYeXPyZ5snrGxn",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "select": "channel",
+        "channelId": {
+          "__rl": true,
+          "value": "C0BLHPD2B27",
+          "mode": "id"
+        },
+        "text": "=🚨 ESCALADO A HUMANO — Soporte_Humano_Requerido\nLead: {{ $json.nombre }} ({{ $json.email }})\nEmpresa: {{ $('Start').item.json.empresa }}\nIntención detectada: {{ $('Start').item.json.intent }}\nconfianza: {{ $('Start').item.json.confidence }}\nResumen del triaje: {{ $('Start').item.json.resumen }}\nMensaje original: \"{{ $('Start').item.json.mensaje }}\"\n👉 Retomar la conversación manualmente. La IA no responde este caso.",
+        "otherOptions": {}
+      },
+      "type": "n8n-nodes-base.slack",
+      "typeVersion": 2.5,
+      "position": [
+        864,
+        80
+      ],
+      "id": "66fb8f99-8eb7-47b4-ac3d-4d211284432b",
+      "name": "Send a message",
+      "webhookId": "89a60a58-76fc-4451-a520-009d815ecc9f",
+      "credentials": {
+        "slackApi": {
+          "id": "12AjMmqG8W5pgoXG",
+          "name": "Slack account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Start": {
+      "main": [
+        [
+          {
+            "node": "Buscar escalado en base",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Buscar escalado en base": {
+      "main": [
+        [
+          {
+            "node": "escalado existe?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "escalado existe?": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "7e0e99a3-5904-4e5b-a4a1-6a8daf3e9fbb",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "a040a2e2b4108b14c796e54fa2912c39afde5eceb08854310b4b4246c7d31c0d"
+  },
+  "nodeGroups": [],
+  "id": "wkYHRcgWfQ8eutnD",
+  "tags": []
+}
